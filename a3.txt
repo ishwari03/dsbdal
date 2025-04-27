@@ -1,0 +1,34 @@
+import numpy as np
+import pandas as pd
+import sklearn 
+from sklearn import datasets
+import seaborn as sns
+
+titanic_df = sns.load_dataset('titanic')
+titanic_df
+titanic_df.head()
+
+print("\nStatistical Summary:\n", titanic_df.describe())
+# Grouping 'Age' by 'Pclass' and computing summary statistics
+age_summary = titanic_df.groupby("pclass")["age"].describe()[["mean","50%","min","max","std"]]
+age_summary.columns = ["Mean","Median","Min","Max","Std Dev"]
+print("Summary Statistics for Age grouped by Passenger Class:\n")
+print(age_summary)
+
+# Creating a list that contains a numeric value for each Pclass category
+pclass_counts = titanic_df["pclass"].value_counts().to_dict()
+print(pclass_counts)
+pclass_numeric_list = [pclass_counts[pclass] for pclass in titanic_df["pclass"]]
+print("\nNumeric list for each Pclass response:", pclass_numeric_list[:10])  # Display first 10 values 
+
+#task2 
+iris_df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris_df
+# Group by species and describe
+grouped_stats = iris_df.groupby('species')
+
+print("\nBasic Statistical Details for Each Species:\n")
+
+for species, data in grouped_stats:
+    print(f"\nStatistics for {species.capitalize()}:\n")
+    print(data.describe())
