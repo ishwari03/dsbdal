@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+df=pd.read_csv(r"C:\Users\UNKNOWN_CODER\DSDBA\Assign1\data.csv")
+
+print(df)
+print(df.head)
+print(df.tail)
+
+#Data preprocessing
+## Check for Missing Values
+missing_values = df.isnull().sum()
+print(missing_values)
+
+# Display the first few rows of the dataset
+display(df.head())
+
+## Statistical Summary
+print("\nStatistical Summary:")
+print(df.describe())
+
+print("\nDimensions of dataset:\n", df.shape)
+
+print(df.info())
+
+#Variable descriptions and types
+print("\nData types:\n" ,df.dtypes)
+
+#data formatting
+print("\nConverting 'Car' and 'Model' to Categorical Variables")
+df['Car']= df['Car'].astype('category')
+df['Model']= df['Model'].astype('category')
+print(df.dtypes)
+
+# One-hot encoding for categorical variables
+print("\nApplying one hot encoding to categorical variables\n")
+df_encoded = pd.get_dummies(df,columns=['Car','Model'], drop_first=True)
+print(df_encoded.head())
