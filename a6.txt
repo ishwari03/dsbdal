@@ -56,6 +56,17 @@ for i, class_name in enumerate(classes):
     print(f"True Negatives (TN): {TN}")
     print()
 
+#OR write this :
+for i, class_name in enumerate(classes):
+    TP = cm[i][i]                      # TP = correct prediction for this class
+    FP = sum(cm[j][i] for j in range(len(classes))) - TP  # FP = predicted as this class but actually something else
+    FN = sum(cm[i][j] for j in range(len(classes))) - TP  # FN = actual class but predicted something else
+    TN = cm.sum() - (TP + FP + FN)      # TN = all other correct predictions
+    
+    print(f"Class: {class_name}")
+    print(f"TP: {TP}, FP: {FP}, FN: {FN}, TN: {TN}\n")
+
+
 # Calculate metrics
 accuracy = accuracy_score(y_test, y_pred)
 error_rate = 1 - accuracy
