@@ -1,0 +1,77 @@
+# Downloading and Importing Libraries
+!pip install nltk
+
+import nltk
+import re
+import pandas as pd
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+
+# Creating the document for Text Analysis
+text = "Hello Everyone! I am Ishwari Pusadkar pursuing Computer Engineering in MES College Of Engineering. I am currently in Third Year Of Computer Engineering."
+
+# 1. Sentence Tokenization
+from nltk.tokenize import sent_tokenize
+sentences = sent_tokenize(text)
+print("Sentence Tokenization:\n", sentences)
+
+# 2. Word Tokenization
+from nltk.tokenize import word_tokenize
+words = word_tokenize(text)
+print("Word Tokenization:\n", words)
+
+# 3. POS Tagging
+pos_tags = nltk.pos_tag(words)
+print("POS Tagging:\n", pos_tags)
+
+# 4. Removing Punctuation and Stopwords
+from nltk.corpus import stopwords
+text_clean = re.sub('[^a-zA-Z]', ' ', text)
+tokens = word_tokenize(text_clean.lower())
+stop_words = set(stopwords.words('english'))
+filtered_words = [word for word in tokens if word not in stop_words]
+print("\nTokenized Sentence:\n", tokens)
+print("\nFiltered Words (no stopwords & no punctuation):\n", filtered_words)
+
+# 5. Stemming
+from nltk.stem import PorterStemmer
+e_words = ["write", "writing", "wrote", "writes"]
+ps = PorterStemmer()
+for word in e_words:
+    root_word = ps.stem(word)
+    print(root_word)
+
+# 6. Lemmatization
+from nltk.stem import WordNetLemmatizer
+wordnet_lemmatizer = WordNetLemmatizer()
+text = "studies studying cries cry"
+tt = nltk.word_tokenize(text)
+print(text)
+for word in tt:
+    print("Lemma for {} is {}".format(word, wordnet_lemmatizer.lemmatize(word)))
+
+# 7. TF-IDF Representation
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Sample Documents
+documents = [
+    "Hello everyone! I am Ishwari Pusadkar. I am in TY pursuing Bachelors Degree in Computer Science at MES Wadia College Of Engineering.",
+    "I have good knowledge about C, C++, Java, Jython, HTML, CSS, JS, Bootstrap and Databases.",
+    "In my free time, I like listening to music as it makes me feel relaxed."
+]
+
+# Create a TF-IDF Vectorizer
+vectorizer = TfidfVectorizer()
+
+# Fit the model and transform the documents to get the TF-IDF matrix
+X = vectorizer.fit_transform(documents)
+
+# Convert the TF-IDF matrix to a DataFrame for better visualization
+tfidf_df = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
+
+# Display the TF-IDF DataFrame
+print("TF-IDF Matrix:")
+print(tfidf_df)
