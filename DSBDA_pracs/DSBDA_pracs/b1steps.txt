@@ -1,0 +1,20 @@
+1. for java compilation locate jar files from hadoop dir:
+hadoop@mescoe-Lenovo-S510:~$ javac -cp /home/hadoop/hadoop/share/hadoop/common/*:/home/hadoop/hadoop/share/hadoop/mapreduce/*:/home/hadoop/hadoop/share/hadoop/hdfs/*:/home/hadoop/hadoop/share/hadoop/tools/lib/* B1/WordCount.java
+
+2. Creating jar for base B1 dir(created by me):
+hadoop@mescoe-Lenovo-S510:~$ jar -cvf B1.jar -C B1/ .
+
+3. Making a directory in hadoop (eg:input):
+hadoop fs -mkdir /input
+
+4. make a normal text file(eg:tp.txt) add content:
+hadoop fs -put tp.txt /input
+
+5. add jar to hadoop
+hadoop jar B1.jar WordCount /input /output
+
+6. permissions:
+hadoop fs -ls /output
+
+7. display output:
+hadoop fs -cat /output/part-r-00000
