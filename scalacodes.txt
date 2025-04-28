@@ -1,0 +1,140 @@
+Spark Scala ASSIGNMenT:
+
+Go to terminal:
+mescoe@mescoe-Lenovo-S510:~$ source ~/.bashrc
+mescoe@mescoe-Lenovo-S510:~$ spark-shell
+
+Programs:
+1.	helloworld
+scala> print("Hello WOrld")
+Hello WOrld
+
+2.	addition
+scala> print(3+4)
+7
+
+3.	Largest of 2nos
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+object FindLargestEx{
+  def main(args: Array[String]) {
+   var num1 = 24;
+   var num2 = 76;
+   if( num1 > num2 ) {
+ 	println("Largest number is: " + num1);
+   }
+   else{
+ 	println("Largest number is: " + num2);
+   }
+  }
+}
+
+// Exiting paste mode, now interpreting.
+
+defined object FindLargestEx
+
+scala> FindLargestEx.main(Array.empty[String])
+Largest number is: 76
+
+4.	Sum of 2 nos:
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+object SumEx{
+  def main(args: Array[String]){
+   var a = 24;
+   var b = 76;
+   var sum = a+b;
+   println("Sum of two numbers is: " + sum);
+  }
+}
+
+// Exiting paste mode, now interpreting.
+
+defined object SumEx
+
+scala> SumEx.main(Array.empty[String])
+Sum of two numbers is: 100
+
+
+5. Check whether number is prime or not
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+object PrimeCheck {
+  def main(args: Array[String]): Unit = {
+	print("Enter a number: ")
+	val num = scala.io.StdIn.readInt()
+    
+	val isPrime = num > 1 && !(2 until num).exists(num % _ == 0)
+    
+	println(if (isPrime) s"$num is Prime" else s"$num is Not Prime")
+  }
+}
+
+// Exiting paste mode, now interpreting.
+
+defined object PrimeCheck
+
+
+scala> PrimeCheck.main(Array.empty[String])
+Enter a number: 9 is Not Prime
+
+6. Check whether no is odd or even
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+object EvenOddCheck {
+  def main(args: Array[String]): Unit = {
+	print("Enter a number: ")
+	val num = scala.io.StdIn.readInt()
+    
+	println(if (num % 2 == 0) s"$num is Even" else s"$num is Odd")
+  }
+}
+
+// Exiting paste mode, now interpreting.
+
+defined object EvenOddCheck
+
+scala> EvenOddCheck.main(Array.empty[String])
+Enter a number: 8 is Even
+
+7. Printing fibonacci series
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+import scala.io.StdIn
+
+object FibonacciSeries {
+ def main(args: Array[String]): Unit = {
+	print("Enter the number of terms: ")
+	val n = StdIn.readInt() // Using StdIn.readInt() after import
+
+	var a = 0
+	var b = 1
+
+	print("Fibonacci Series: ")
+	for (_ <- 1 to n) {
+  	print(s"$a ")
+  	val temp = a + b
+  	a = b
+  	b = temp
+	}
+	println() // For a new line after printing
+  }
+}
+
+// Exiting paste mode, now interpreting.
+
+import scala.io.StdIn
+defined object FibonacciSeries
+
+scala> FibonacciSeries.main(Array.empty[String])
+Enter the number of terms: Fibonacci Series: 0 1 1 2
+
+scala>
+
+Hadoop link:
+https://medium.com/@abhikdey06/apache-hadoop-3-3-6-installation-on-ubuntu-22-04-14516bceec85
